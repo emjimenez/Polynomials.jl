@@ -109,7 +109,7 @@ end
 function buchberger{C <: Number, O <: TermOrder}(polynomials::Array{Polynomial{C, O}})
 	# need to sort polynomials according to term order
 	gb = polynomials
-	q = Deque{tuple(Polynomial{C, O}, Polynomial{C, O})}()
+	q = Deque{Tuple{Polynomial{C, O}, Polynomial{C, O}}}()
 
 	for i = 1:length(gb)-1, j = i+1:length(gb)
 		pair = (polynomials[i], polynomials[j])
@@ -130,7 +130,7 @@ function buchberger{C <: Number, O <: TermOrder}(polynomials::Array{Polynomial{C
 			end
 			
 			# and add it to the basis
-			gb = [gb, r]			
+			gb = [gb; r]
 		end	
 	end
 	
@@ -140,7 +140,7 @@ end
 # Reduction of a polynomial modulo a Groebner basis
 function reduce{C <: Number, O <: TermOrder}(poly::Polynomial{C, O}, gb::GroebnerBasis{C, O})
 	if poly.ring != gb.ring
-		throw (ArgumentError())
+		throw(ArgumentError())
 	else
 		reduce_(poly, gb.poly)
 	end

@@ -23,8 +23,8 @@
 
 module Polynomials
 
-	require("DataStructures")
-	using DataStructures
+    using DataStructures
+    import Base: -, *, ==, !=, +, ^, colon
 	
     export PolynomialRing
     export Polynomial

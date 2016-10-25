@@ -42,7 +42,7 @@ type PolynomialRing{C <: Number, O <: TermOrder}
         idxmap = [ variables[i] => i for i = 1:length(variables) ]
         
         if length(idxmap) != length(variables)
-            throw (ArgumentError())
+            throw(ArgumentError())
         end
         
         new(copy(variables), idxmap)
@@ -189,7 +189,7 @@ colon{C <: Number, O <: TermOrder}(var::Symbol, rg::PolynomialRing{C, O}) = inje
 
 function plusminus_{C <: Number, O <: TermOrder}(left::Polynomial{C, O}, right::Polynomial{C, O}, op::Function)
     if left.ring != right.ring
-        throw (ArgumentError())
+        throw(ArgumentError())
     end
     
     # Process the term lists from high to low term order to merge terms based on exponent structure
@@ -258,7 +258,7 @@ end
 
 function *{C <: Number, O <: TermOrder}(left::Polynomial{C, O}, right::Polynomial{C, O})
     if left.ring != right.ring
-        throw (ArgumentError())
+        throw(ArgumentError())
     end
 
     termsl = left.terms
@@ -302,7 +302,7 @@ end
 
 function ^{C <: Number, O <: TermOrder}(poly::Polynomial{C, O}, exponent::Integer)
 	if exponent < 0
-		throw (ArgumentError())
+		throw(ArgumentError())
 	elseif exponent == 0
         return Polynomial{C, O}(rg, Array(Term{C}, 0))
 	elseif length(poly.terms) == 0
